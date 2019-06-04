@@ -46,6 +46,7 @@ public class DeviceController {
 
 	    device.setLotId( deviceDetails.getLotId());
 	    device.setState(deviceDetails.getState());
+	    device.setType( deviceDetails.getType());
 	    
 	    Device updatedDevice = deviceRepository.save(device);
 	    return updatedDevice;

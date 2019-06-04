@@ -39,7 +39,7 @@ public class Device implements Serializable{
 			this.state = state;
 		}
 
-		public String isType() {
+		public String getType() {
 			return type;
 		}
 
