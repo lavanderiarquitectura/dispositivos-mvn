@@ -12,31 +12,72 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "rooms")
+@Table(name = "lots")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties( allowGetters = true)
 public class Lot implements Serializable{
-	  	@Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
-	  	
-	  	@NotNull
-	  	private String typeService;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-		public Long getId() {
-			return id;
-		}
+	@NotNull
+	private String typeService;
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	private Integer typeOperation;
 
-		public String getTypeService() {
-			return typeService;
-		}
+	private Integer typeFabric;
 
-		public void setTypeService(String typeService) {
-			this.typeService = typeService;
-		}
-	  	
+	private Boolean isFinished;
+
+	@Column(name="capacity", columnDefinition="Integer(11) default '0'")
+	private Integer capacity;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTypeService() {
+		return typeService;
+	}
+
+	public void setTypeService(String typeService) {
+		this.typeService = typeService;
+	}
+
+	public Integer getTypeOperation() {
+		return typeOperation;
+	}
+
+	public void setTypeOperation(Integer typeOperation) {
+		this.typeOperation = typeOperation;
+	}
+
+	public Integer getTypeFabric() {
+		return typeFabric;
+	}
+
+	public void setTypeFabric(Integer typeFabric) {
+		this.typeFabric = typeFabric;
+
+	}
+
+	public Boolean getIsFinished() {
+		return isFinished;
+	}
+
+	public void setIsFinished(Boolean finished) {
+		isFinished = finished;
+	}
+
+	public Integer getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
 }

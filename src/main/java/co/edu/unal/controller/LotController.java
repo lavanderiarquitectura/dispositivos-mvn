@@ -29,7 +29,19 @@ public class LotController {
 	    return lotRepository.findById(lotId)
 	            .orElseThrow(() -> new ResourceNotFoundException("Note", "id", lotId));
 	}
-	
+
+	// Get a list of  Lot by operationID, fabriqueID and if lot has finished
+	@GetMapping("/lots/{id_op}/{id_fab}/{bool_fin}")
+	public List<Lot> getLotByIdOperAndFab(@PathVariable(value = "id_op") Integer opId, @PathVariable(value = "id_fab") Integer fabId,
+										  @PathVariable(value = "bool_fin") Boolean boolFin) {
+		return lotRepository.findByTypeOperationAndTypeFabricAndIsFinished(opId, fabId, boolFin);
+	}
+
+	@GetMapping("/lots/max")
+	public Lot getMaxId() {
+		return lotRepository.findTopByOrderByIdDesc();
+	}
+
 	// Create a new Lot
 	@PostMapping("/lots")
 	public Lot createLot(@Valid @RequestBody Lot lot) {
