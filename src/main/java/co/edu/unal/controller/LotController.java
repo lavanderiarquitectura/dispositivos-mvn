@@ -42,6 +42,12 @@ public class LotController {
 		return lotRepository.findTopByOrderByIdDesc();
 	}
 
+	// Get a list of  Lot by operationID and if lot has finished
+	@GetMapping("/lots/{id_op}/{bool_fin}")
+	public List<Lot> getLotByIdOper(@PathVariable(value = "id_op") Integer opId, @PathVariable(value = "bool_fin") Boolean boolFin) {
+		return lotRepository.findByTypeOperationAndIsFinished(opId, boolFin);
+	}
+
 	// Create a new Lot
 	@PostMapping("/lots")
 	public Lot createLot(@Valid @RequestBody Lot lot) {

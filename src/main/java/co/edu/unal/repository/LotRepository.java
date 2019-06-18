@@ -12,5 +12,6 @@ public interface LotRepository extends JpaRepository<Lot, Long> {
 
     List<Lot> findByTypeOperationAndTypeFabricAndIsFinished(Integer typeOperation, Integer fabricType, Boolean isFinished);
     Lot findTopByOrderByIdDesc();
+    List<Lot> findByTypeOperationAndIsFinished(Integer typeOperation, Boolean isFinished);
 
 }
