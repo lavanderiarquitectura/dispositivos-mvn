@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +24,19 @@ public class DeviceController {
 	public List<Device> getAllDevices() {
 	    return deviceRepository.findAll();
 	}
+	
+	// Get All Devices
+	@GetMapping("/devices/byType/{type}")
+	public List<Device> getAllDevicesByType(@PathVariable(value = "type") String type) {
+		List<Device> allDevices = deviceRepository.findAll();
+		List<Device> devicesByType = new ArrayList<Device>();
+		for(Device device: allDevices) {
+			if(device.getType().equals(type))
+				devicesByType.add(device);
+		}
+	    return devicesByType;
+	}
+		
 	
 	// Get a Single Device
 	@GetMapping("/devices/{id}")
