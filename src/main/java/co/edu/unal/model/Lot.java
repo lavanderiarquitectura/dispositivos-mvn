@@ -28,6 +28,8 @@ public class Lot implements Serializable{
 	private Integer typeFabric;
 
 	private Boolean isFinished;
+	
+	private Integer state;
 
 	@Column(name="capacity", columnDefinition="Integer(11) default '0'")
 	private Integer capacity;
@@ -79,5 +81,13 @@ public class Lot implements Serializable{
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
 	}
 }

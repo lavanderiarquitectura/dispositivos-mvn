@@ -64,6 +64,7 @@ public class LotController {
 
 	   
 	    lot.setTypeService(lotDetails.getTypeService());
+	    lot.setState(lotDetails.getState());
 	    
 	    Lot updatedLot = lotRepository.save(lot);
 	    return updatedLot;
