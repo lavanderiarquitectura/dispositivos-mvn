@@ -35,7 +35,7 @@ public class LotController {
 
 	// Get All Lots for 
 	@GetMapping("/lots/byTypeOperation/{type_operation}")
-	public List<Lot> getAllLotsByTypeOperation(@PathVariable(value = "type_operation") String type) {
+	public List<Lot> getAllLotsByTypeOperation(@PathVariable(value = "type_operation") Integer type) {
 		List<Lot> allLots = lotRepository.findAll();
 		List<Lot> lotsByType = new ArrayList<>();
 		for(Lot device: allLots) {
