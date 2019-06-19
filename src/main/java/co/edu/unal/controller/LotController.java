@@ -1,6 +1,7 @@
 package co.edu.unal.controller;
 
 import co.edu.unal.exception.ResourceNotFoundException;
+import co.edu.unal.model.Device;
 import co.edu.unal.model.Lot;
 import co.edu.unal.repository.LotRepository;
 
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,18 @@ public class LotController {
 	            .orElseThrow(() -> new ResourceNotFoundException("Note", "id", lotId));
 	}
 
+	// Get All Lots for 
+	@GetMapping("/lots/byTypeOperation/{type_operation}")
+	public List<Lot> getAllLotsByTypeOperation(@PathVariable(value = "type_operation") String type) {
+		List<Lot> allLots = lotRepository.findAll();
+		List<Lot> lotsByType = new ArrayList<>();
+		for(Lot device: allLots) {
+			if(device.getTypeOperation()().equals(type))
+				lotsByType.add(device);
+		}
+	    return lotsByType;
+	}
+	
 	// Get a list of  Lot by operationID, fabriqueID and if lot has finished
 	@GetMapping("/lots/{id_op}/{id_fab}/{bool_fin}")
 	public List<Lot> getLotByIdOperAndFab(@PathVariable(value = "id_op") Integer opId, @PathVariable(value = "id_fab") Integer fabId,
@@ -61,9 +76,8 @@ public class LotController {
 
 	    Lot lot = lotRepository.findById(lotId)
 	            .orElseThrow(() -> new ResourceNotFoundException("Lot", "id", lotId));
-
 	   
-	    lot.setTypeService(lotDetails.getTypeService());
+	    lot.setTypeOperation(lotDetails.getTypeOperation());
 	    lot.setState(lotDetails.getState());
 	    
 	    Lot updatedLot = lotRepository.save(lot);

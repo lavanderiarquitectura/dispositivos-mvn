@@ -20,9 +20,6 @@ public class Lot implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
-	private String typeService;
-
 	private Integer typeOperation;
 
 	private Integer typeFabric;
@@ -40,14 +37,6 @@ public class Lot implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getTypeService() {
-		return typeService;
-	}
-
-	public void setTypeService(String typeService) {
-		this.typeService = typeService;
 	}
 
 	public Integer getTypeOperation() {
