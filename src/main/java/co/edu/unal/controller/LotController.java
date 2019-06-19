@@ -39,7 +39,7 @@ public class LotController {
 		List<Lot> allLots = lotRepository.findAll();
 		List<Lot> lotsByType = new ArrayList<>();
 		for(Lot device: allLots) {
-			if(device.getTypeOperation()().equals(type))
+			if(device.getTypeOperation().equals(type))
 				lotsByType.add(device);
 		}
 	    return lotsByType;
