@@ -34,13 +34,28 @@ public class LotController {
 	}
 
 	// Get All Lots for 
-	@GetMapping("/lots/byTypeOperation/{type_operation}")
+	@GetMapping("/lots/byOperation/{type_operation}")
 	public List<Lot> getAllLotsByTypeOperation(@PathVariable(value = "type_operation") Integer type) {
 		List<Lot> allLots = lotRepository.findAll();
 		List<Lot> lotsByType = new ArrayList<>();
 		for(Lot device: allLots) {
 			if(device.getTypeOperation().equals(type))
 				lotsByType.add(device);
+		}
+	    return lotsByType;
+	}
+	
+	// Get All Lots for type and state
+	@GetMapping("/lots/byOperationAndState/{type_operation}/{state}")
+	public List<Lot> getAllLotsByTypeOperationAndState(@PathVariable(value = "type_operation") Integer type, @PathVariable(value = "state") Integer state) {
+		List<Lot> allLots = lotRepository.findAll();
+		List<Lot> lotsByType = new ArrayList<>();
+		for(Lot l: allLots) {
+			if(l.getTypeOperation() != null &&
+					l.getState() != null &&
+					l.getTypeOperation().equals(type) && 
+					l.getState().equals(state))
+				lotsByType.add(l);
 		}
 	    return lotsByType;
 	}
@@ -79,6 +94,8 @@ public class LotController {
 	   
 	    lot.setTypeOperation(lotDetails.getTypeOperation());
 	    lot.setState(lotDetails.getState());
+	    lot.setIsFinished(lotDetails.getIsFinished());
+	    lot.setTypeFabric(lotDetails.getTypeFabric());
 	    
 	    Lot updatedLot = lotRepository.save(lot);
 	    return updatedLot;

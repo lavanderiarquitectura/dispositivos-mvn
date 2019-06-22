@@ -36,6 +36,22 @@ public class DeviceController {
 		}
 	    return devicesByType;
 	}
+	
+	
+	// Get All Devices
+	@GetMapping("/devices/byTypeAndState/{type}/{state}")
+	public List<Device> getAllDevicesByTypeAndState(@PathVariable(value = "type") String type,@PathVariable(value = "state") String state) {
+		List<Device> allDevices = deviceRepository.findAll();
+		List<Device> devicesByTypeAndState = new ArrayList<Device>();
+		for(Device device: allDevices) {
+			if(device.getType() != null &&
+					device.getState() != null &&
+					device.getType().equals(type) && device.getState().equals(state))
+				devicesByTypeAndState.add(device);
+		}
+	    return devicesByTypeAndState;
+	}
+		
 		
 	
 	// Get a Single Device
