@@ -96,6 +96,7 @@ public class LotController {
 	    lot.setState(lotDetails.getState());
 	    lot.setIsFinished(lotDetails.getIsFinished());
 	    lot.setTypeFabric(lotDetails.getTypeFabric());
+	    lot.setCapacity(lotDetails.getCapacity());
 	    
 	    Lot updatedLot = lotRepository.save(lot);
 	    return updatedLot;
